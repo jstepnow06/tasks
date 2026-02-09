@@ -5,7 +5,12 @@
  * the number twice.
  */
 export function bookEndList(numbers: number[]): number[] {
-    return numbers;
+    let nums: number[] = [];
+    if (numbers.length > 0) {
+        nums.push(numbers[0]);
+        nums.push(numbers[numbers.length - 1]);
+    }
+    return nums;
 }
 
 /**
@@ -13,7 +18,8 @@ export function bookEndList(numbers: number[]): number[] {
  * number has been tripled (multiplied by 3).
  */
 export function tripleNumbers(numbers: number[]): number[] {
-    return numbers;
+    const triples: number[] = numbers.map((num: number): number => num * 3);
+    return triples;
 }
 
 /**
@@ -21,7 +27,10 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    return [];
+    const ints: number[] = numbers.map((num: string): number =>
+        parseInt(num) ? parseInt(num) : 0,
+    );
+    return ints;
 }
 
 /**
@@ -32,7 +41,17 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
-    return [];
+    let dollars: number[] = [];
+    if (amounts.length > 0) {
+        dollars = amounts.map((amt: string): number => {
+            if (amt[0] === "$") {
+                return parseInt(amt.slice(1)) ? parseInt(amt.slice(1)) : 0;
+            } else {
+                return parseInt(amt) ? parseInt(amt) : 0;
+            }
+        });
+    }
+    return dollars;
 };
 
 /**
@@ -41,7 +60,17 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    return [];
+    let exclaims: string[] = messages.filter(
+        (msg: string): boolean => !msg.endsWith("?"),
+    );
+    exclaims = exclaims.map((msg: string): string => {
+        if (msg.endsWith("!")) {
+            return msg.toUpperCase();
+        } else {
+            return msg;
+        }
+    });
+    return exclaims;
 };
 
 /**
@@ -49,7 +78,13 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
  * 4 letters long.
  */
 export function countShortWords(words: string[]): number {
-    return 0;
+    let count: number = 0;
+    words.forEach((word: string): void => {
+        if (word.length < 4) {
+            count++;
+        }
+    });
+    return count;
 }
 
 /**
@@ -58,7 +93,13 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    return false;
+    let all: boolean = true;
+    colors.forEach((color: string): void => {
+        if (color !== "red" && color !== "blue" && color !== "green") {
+            all = false;
+        }
+    });
+    return all;
 }
 
 /**
@@ -69,7 +110,22 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    return "";
+    let sum: number = addends.reduce(
+        (total: number, num: number): number => total + num,
+        0,
+    );
+    let output: string = sum + "=";
+    addends.forEach((num: number, index: number): void => {
+        if (index < addends.length - 1) {
+            output += num + "+";
+        } else {
+            output += num;
+        }
+    });
+    if (addends.length === 0) {
+        output += "0";
+    }
+    return output;
 }
 
 /**
@@ -82,5 +138,22 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    let cont: boolean = true;
+    let sum: number = 0;
+    let newVals: number[] = [];
+    values.forEach((num: number): void => {
+        if (num < 0 && cont) {
+            cont = false;
+            newVals.push(num);
+            newVals.push(sum);
+        } else {
+            newVals.push(num);
+            sum += num;
+        }
+    });
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    if (cont) {
+        newVals.push(sum);
+    }
+    return newVals;
 }
