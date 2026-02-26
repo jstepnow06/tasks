@@ -21,7 +21,7 @@ function App(): React.JSX.Element {
                     Stepnowski
                 </header>
                 <header
-                    role="heading"
+                    role="heading1"
                     className="Body-header"
                     style={{ color: "orange" }}
                 >
@@ -61,7 +61,7 @@ function App(): React.JSX.Element {
                 </div>
             </div>
             <hr></hr>
-            {/* <DoubleHalf></DoubleHalf> */}
+            {<DoubleHalf></DoubleHalf>}
             <hr></hr>
             <ChooseTeam></ChooseTeam>
             <hr></hr>
