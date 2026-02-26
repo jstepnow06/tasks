@@ -32,17 +32,21 @@ export function EditMode(): React.JSX.Element {
                     onChange={(e) => {
                         setStudent({ ...student, name: e.target.value });
                     }}
-                    disabled={!student.edit}
+                    hidden={!student.edit}
                 ></Form.Control>
             </Form.Group>
             <Form.Check
+                id="student-checkbox"
                 type="checkbox"
-                label="Student"
+                label="student"
                 checked={student.isStudent}
                 onChange={() => {
-                    setStudent({ ...student, isStudent: !student.isStudent });
+                    setStudent({
+                        ...student,
+                        isStudent: !student.isStudent,
+                    });
                 }}
-                disabled={!student.edit}
+                hidden={!student.edit}
             ></Form.Check>
         </div>
     );
